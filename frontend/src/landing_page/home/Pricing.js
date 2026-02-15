@@ -1,13 +1,13 @@
 import React from 'react';
 
 function Pricing() {
-    return ( 
+    return (
         <div className='container mb-5'>
             <div className='row'>
                 <div className='col-4'>
                     <h1 className='mb-3 fs-2'>Unbeatable pricing</h1>
                     <p>We pioneered the concept of discount broking and price transparency in India. Flat fees and no hidden charges.</p>
-                    <a href='' style={{textDecoration:"none"}}>See Pricing <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                    <a href='/' style={{ textDecoration: "none" }}>See Pricing <i className="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                 </div>
                 <div className='col-2'></div>
                 <div className='col-6'>
@@ -24,7 +24,7 @@ function Pricing() {
                 </div>
             </div>
         </div>
-     );
+    );
 }
 
 export default Pricing;

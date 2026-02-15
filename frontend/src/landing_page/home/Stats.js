@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Stats() {
-    return ( 
+    return (
         <div className='container p-3'>
             <div className='row p-5'>
                 <div className='col-6 p-5'>
@@ -17,15 +17,15 @@ function Stats() {
 
                 </div>
                 <div className='col-6 p-5'>
-                    <img src = 'media/ecosystem.png' style={{width:"90%"}}></img>
+                    <img src='media/ecosystem.png' style={{ width: "90%" }} alt="Ecosystem" />
                     <div className='text-center'>
-                        <a href='' className='mx-5' style={{textDecoration:"none"}}>Explore our products <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                        <a href='' style={{textDecoration:"none"}}>Try Kite <i class="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        <a href='/' className='mx-5' style={{ textDecoration: "none" }}>Explore our products <i className="fa fa-long-arrow-right" aria-hidden="true"></i></a>
+                        <a href='/' style={{ textDecoration: "none" }}>Try Kite <i className="fa fa-long-arrow-right" aria-hidden="true"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-     );
+    );
 }
 
 export default Stats;

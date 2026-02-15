@@ -10,7 +10,7 @@ function CreateTicket() {
 
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i class="fa fa-plus-circle" aria-hidden="true"></i> Account Opening
+                        <i className="fa fa-plus-circle" aria-hidden="true"></i> Account Opening
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Online Account Opening
@@ -46,7 +46,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i class="fa fa-user" aria-hidden="true"></i> Your Zerodha Account
+                        <i className="fa fa-user" aria-hidden="true"></i> Your Zerodha Account
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Login Credentials
@@ -74,7 +74,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i class="fa fa-bar-chart" aria-hidden="true"></i> Your Zerodha Account
+                        <i className="fa fa-bar-chart" aria-hidden="true"></i> Your Zerodha Account
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Margin/leverage, Product and Order types
@@ -114,7 +114,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i class="fa fa-credit-card" aria-hidden="true"></i> Funds
+                        <i className="fa fa-credit-card" aria-hidden="true"></i> Funds
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Adding Funds
@@ -134,7 +134,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i class="fa fa-circle-o-notch" aria-hidden="true"></i> Console
+                        <i className="fa fa-circle-o-notch" aria-hidden="true"></i> Console
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Reports
@@ -162,7 +162,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i class="fa fa-circle-thin" aria-hidden="true"></i> Coin
+                        <i className="fa fa-circle-thin" aria-hidden="true"></i> Coin
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Understanding Mutual Funds
