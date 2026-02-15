@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import api from "../../api"; // <-- IMPORTANT (path matters)
-import { useNavigate } from "react-router-dom";
+
 import "./Login.css";
 
 const Login = () => {
@@ -8,7 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  const navigate = useNavigate();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
