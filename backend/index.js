@@ -18,10 +18,19 @@ const MONGO_URL = process.env.MONGO_URL;
 
 app.use(
   cors({
-    origin: ["http://localhost:3000", "http://localhost:3001"],
+    origin: [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      process.env.FRONTEND_URL,
+      process.env.DASHBOARD_URL,
+    ].filter(Boolean), // Filter out undefined if env vars are not set
     credentials: true,
   })
 );
+
+app.get("/", (req, res) => {
+  res.send("Backend is running!");
+});
 
 app.use(cookieParser());
 app.use(express.json());
