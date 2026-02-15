@@ -83,11 +83,10 @@ app.get("/allOrders", verifyJWT, async (req, res) => {
   }
 });
 
-mongoose
-  .connect(MONGO_URL)
-  .then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server running on port ${PORT}`);
-    });
-  })
-  .catch(console.error);
+app.listen(PORT, () => {
+  console.log(`Server started on port ${PORT}`);
+
+  mongoose.connect(MONGO_URL)
+    .then(() => console.log("DB connected!"))
+    .catch((err) => console.error("DB Connection Error:", err));
+});
