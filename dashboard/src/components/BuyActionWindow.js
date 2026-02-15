@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 
-import axios from "axios";
+
 import api from "../api";
 
 import GeneralContext from "./GeneralContext";
