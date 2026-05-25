@@ -6,7 +6,7 @@ function Navbar() {
         <nav className="navbar navbar-expand-lg border-bottom" style={{ backgroundColor: "#ffffff" }}>
             <div className="container p-2">
                 <Link className="navbar-brand" to="/">
-                    <img src="media/logo.svg" style={{ width: "25%" }} alt="Logo" />
+                    <span style={{ fontSize: "1.5rem", fontWeight: "700", color: "#4184f3", letterSpacing: "0.5px" }}>TradeDash</span>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>

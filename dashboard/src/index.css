@@ -879,3 +879,12 @@ hr {
 .action:hover {
   background-color: rgb(212, 212, 212);
 }
+
+/* ⚡ Real-Time Price Update Micro-Animations */
+.flash-up-tick {
+  background-color: rgba(76, 175, 80, 0.25) !important;
+}
+
+.flash-down-tick {
+  background-color: rgba(244, 67, 54, 0.25) !important;
+}

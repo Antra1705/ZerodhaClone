@@ -18,7 +18,7 @@ const Menu = () => {
 
     return (
         <div className="menu-container">
-            <img src="logo.png" style={{ width: "50px" }} alt="Logo" />
+            <span style={{ fontSize: "1.2rem", fontWeight: "700", color: "#4184f3", letterSpacing: "0.2px" }}>TradeDash</span>
             <div className="menus">
                 <ul>
                     <li>
