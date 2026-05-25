@@ -7,7 +7,7 @@ import {
   KeyboardArrowUp,
   MoreHoriz,
 } from "@mui/icons-material";
-import { watchlist as initialWatchlist } from "../data/data";
+import { watchlist as initialWatchlist } from "../dashboard_data/data";
 import { Doughnut } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend } from "chart.js";
 import { io } from "socket.io-client";

@@ -33,11 +33,11 @@ function CreateTicket() {
                     </a>
                     <br />
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
-                        Charges at Zerodha
+                        Charges at TradeDash
                     </a>
                     <br />
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
-                        Zerodha IDFC FIRST Bank 3-in-1 Account
+                        TradeDash IDFC FIRST Bank 3-in-1 Account
                     </a>
                     <br />
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
@@ -46,7 +46,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i className="fa fa-user" aria-hidden="true"></i> Your Zerodha Account
+                        <i className="fa fa-user" aria-hidden="true"></i> Your TradeDash Account
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Login Credentials
@@ -74,7 +74,7 @@ function CreateTicket() {
                 </div>
                 <div className='col-4 p-5 mt-2 mb-2'>
                     <h4 className="">
-                        <i className="fa fa-bar-chart" aria-hidden="true"></i> Your Zerodha Account
+                        <i className="fa fa-bar-chart" aria-hidden="true"></i> Your TradeDash Account
                     </h4>
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
                         Margin/leverage, Product and Order types
@@ -185,7 +185,7 @@ function CreateTicket() {
                     </a>
                     <br />
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>
-                        Charges at Zerodha
+                        Charges at TradeDash
                     </a>
                     <br />
                     <a href="/" style={{ textDecoration: "none", lineHeight: "2.5", fontSize: "15px" }}>

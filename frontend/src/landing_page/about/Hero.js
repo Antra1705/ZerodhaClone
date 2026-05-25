@@ -12,19 +12,18 @@ function Hero() {
                 <div className='col-6 p-5'>
                     <p>
                         We kick-started operations on the 15th of August, 2010 with the goal
-                        of breaking all barriers that traders and investors face in India in
-                        terms of cost, support, and technology. We named the company
-                        Zerodha, a combination of Zero and "Rodha", the Sanskrit word for
-                        barrier.
+                        of breaking all barriers that traders and investors face in US stock markets in
+                        terms of cost, speed, and real-time execution. We named our platform
+                        TradeDash, representing swift, seamless, and high-velocity capital growth.
                     </p>
                     <p>
-                        Today, our disruptive pricing models and in-house technology have
-                        made us the biggest stock broker in India.
+                        Today, our disruptive tech stack and real-time data streaming have
+                        made us the premium US trading terminal.
                     </p>
                     <p>
                         Over 1+ Crore clients place millions of orders every day through our
                         powerful ecosystem of investment platforms, contributing over 15% of
-                        all Indian retail trading volumes.
+                        all US tech retail trading volumes.
                     </p>
 
 

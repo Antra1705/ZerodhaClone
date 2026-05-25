@@ -1,6 +1,6 @@
 # 🚀 TradeDash — Premium Real-Time US Equities Trading Terminal
 
-TradeDash is a high-performance, responsive stock trading application designed to simulate a modern, feature-rich broker terminal. It is built using a decoupled architecture comprising a Node.js/Express backend server, a client landing hub, and a sophisticated investor dashboard.
+TradeDash is a high-performance, responsive stock trading application designed to simulate a modern, feature-rich broker terminal. It is built using a Node.js/Express API server and a unified React SPA that serves the marketing site, authentication flows, and the secure trading terminal on a single origin.
 
 The application has been rebuilt from a static frontend mock into an active, real-data trading platform utilizing real-time WebSocket pipelines, TradingView analytics charts, robust database transactions, and comprehensive security guardrails.
 
@@ -28,7 +28,7 @@ The application has been rebuilt from a static frontend mock into an active, rea
 ---
 
 ## 🛠️ Technology Stack
-* **Frontend Dashboard**: React, React Router, Material UI Icons, Chart.js (Summary), TradingView `lightweight-charts` (Analytics).
+* **Unified Frontend (port 3000)**: React, React Router, Material UI Icons, Chart.js (Summary), TradingView `lightweight-charts` (Analytics), Socket.io client (watchlist).
 * **Backend API**: Node.js, Express, Socket.io, Native `ws` client, Mongoose, JWT.
 * **Database**: MongoDB (Atlas Cloud).
 
@@ -58,16 +58,18 @@ The application has been rebuilt from a static frontend mock into an active, rea
    npm run dev
    ```
 
-### 📁 Dashboard Configuration
-1. Navigate to `/dashboard`.
+### 📁 Frontend (Unified SPA)
+1. Navigate to `/frontend`.
 2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start React application:
+3. Optional: create `.env` with `REACT_APP_API_URL=http://localhost:3002` for local API (defaults to production URL if unset).
+4. Start the application on port 3000:
    ```bash
    npm start
    ```
+5. Open [http://localhost:3000](http://localhost:3000) for marketing pages, `/login` for sign-in, and `/dashboard` for the trading terminal after authentication.
 
 ---
 

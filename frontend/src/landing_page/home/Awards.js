@@ -7,8 +7,8 @@ function Awards() {
                     <img src='media/largestBroker.svg' alt="Largest Broker" />
                 </div>
                 <div className='col-6 p-5 mt-5'>
-                    <h1>Largest stock broker in India</h1>
-                    <p className='mb-5'>2+ million Zerodha clients contribute to over 15% of all retail order volumes in India daily by trading and investing in:</p>
+                    <h1>Premium US Stock Trading Terminal</h1>
+                    <p className='mb-5'>2+ million TradeDash clients contribute to over 15% of all US tech retail order volumes daily by trading and investing in:</p>
                     <div className='row'>
                         <div className='col-6'>
                             <ul>
