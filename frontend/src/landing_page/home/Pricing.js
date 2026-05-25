@@ -1,30 +1,43 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Pricing() {
-    return (
-        <div className='container mb-5'>
-            <div className='row'>
-                <div className='col-4'>
-                    <h1 className='mb-3 fs-2'>Unbeatable pricing</h1>
-                    <p>We pioneered the concept of discount broking and price transparency in India. Flat fees and no hidden charges.</p>
-                    <a href='/' style={{ textDecoration: "none" }}>See Pricing <i className="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                </div>
-                <div className='col-2'></div>
-                <div className='col-6'>
-                    <div className='row text-center'>
-                        <div className='col p-3 border'>
-                            <h1 className='mb-3'>₹0</h1>
-                            <p>Free equity delivery and <br></br> direct mutual funds</p>
-                        </div>
-                        <div className='col p-3 border'>
-                            <h1 className='mb-3'>₹20</h1>
-                            <p>Intraday and F&O</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+  return (
+    <section className="mk-section" style={{ paddingTop: 0 }}>
+      <div className="mk-section-header">
+        <h2>Transparent US equity pricing</h2>
+        <p>Simple, published rates. No hidden “plan tiers” or surprise statement lines.</p>
+      </div>
+      <div className="mk-pricing-cards">
+        <div className="mk-price-card glass">
+          <h3>Equity delivery</h3>
+          <div className="amount">
+            $0<span>/trade</span>
+          </div>
+          <p>Unlimited buy &amp; hold. No platform fee on settled positions.</p>
         </div>
-    );
+        <div className="mk-price-card glass featured">
+          <h3>Active trading</h3>
+          <div className="amount">
+            $0.50<span>/contract</span>
+          </div>
+          <p>Options &amp; intraday equities. Capped per order, never scaled by AUM.</p>
+        </div>
+        <div className="mk-price-card glass">
+          <h3>Data &amp; terminal</h3>
+          <div className="amount">
+            $0<span>/mo</span>
+          </div>
+          <p>Real-time watchlist, charts, and order ticket included with account.</p>
+        </div>
+      </div>
+      <p style={{ textAlign: "center", marginTop: 32 }}>
+        <Link to="/pricing" className="mk-btn mk-btn-ghost">
+          Full fee schedule →
+        </Link>
+      </p>
+    </section>
+  );
 }
 
 export default Pricing;

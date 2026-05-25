@@ -1,41 +1,42 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
-    return (
-        <nav className="navbar navbar-expand-lg border-bottom" style={{ backgroundColor: "#ffffff" }}>
-            <div className="container p-2">
-                <Link className="navbar-brand" to="/">
-                    <span style={{ fontSize: "1.5rem", fontWeight: "700", color: "#4184f3", letterSpacing: "0.5px" }}>TradeDash</span>
-                </Link>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className="nav-item">
-                            <Link className="nav-link active" aria-current="page" to="/signup">Signup</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/about">About</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/product">Product</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/pricing">Pricing</Link>
-                        </li>
-                        <li className="nav-item">
-                            <Link className="nav-link active" to="/support">Support</Link>
-                        </li>
-                    </ul>
-                    <form className="d-flex" role="search">
+  return (
+    <header className="mk-nav">
+      <div className="mk-nav-inner">
+        <Link to="/" className="mk-logo">
+          <span className="mk-logo-mark">TD</span>
+          <span className="mk-logo-text">TradeDash</span>
+          <span className="mk-logo-tag">TERMINAL</span>
+        </Link>
 
-                    </form>
-                </div>
-            </div>
-        </nav>
-    );
+        <ul className="mk-nav-links">
+          <li>
+            <NavLink to="/product">Platform</NavLink>
+          </li>
+          <li>
+            <NavLink to="/pricing">Pricing</NavLink>
+          </li>
+          <li>
+            <NavLink to="/about">About</NavLink>
+          </li>
+          <li>
+            <NavLink to="/support">Support</NavLink>
+          </li>
+        </ul>
+
+        <div className="mk-nav-cta">
+          <Link to="/login" className="mk-btn mk-btn-ghost">
+            Sign in
+          </Link>
+          <Link to="/signup" className="mk-btn mk-btn-primary">
+            Get started
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
 }
 
 export default Navbar;

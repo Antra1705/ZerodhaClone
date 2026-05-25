@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import "./index.css";
+import "./landing_page/LandingTheme.css";
 
 // Marketing Landing Pages
 import HomePage from "./landing_page/home/HomePage";
@@ -27,11 +28,11 @@ import Apps from "./dashboard_components/Apps";
 // Marketing pages layout wrapper
 const MarketingLayout = () => {
   return (
-    <>
+    <div className="marketing-site">
       <Navbar />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 };
 

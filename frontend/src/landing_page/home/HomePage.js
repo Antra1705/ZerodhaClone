@@ -1,23 +1,22 @@
-import React from 'react';
-import Hero from './Hero';
-import Awards from './Awards';
-import Education from './Education';
-import Stats from './Stats';
-import Pricing from './Pricing';
-import OpenAccount from '../OpenAccount';
-
+import React from "react";
+import Hero from "./Hero";
+import TickerStrip from "./TickerStrip";
+import Features from "./Features";
+import Stats from "./Stats";
+import Pricing from "./Pricing";
+import OpenAccount from "../OpenAccount";
 
 function HomePage() {
-    return (
-        <>
-            <Hero />
-            <Awards />
-            <Stats />
-            <Pricing />
-            <Education />
-            <OpenAccount />
-        </>
-    );
+  return (
+    <main className="mk-home">
+      <Hero />
+      <TickerStrip />
+      <Features />
+      <Stats />
+      <Pricing />
+      <OpenAccount />
+    </main>
+  );
 }
 
 export default HomePage;

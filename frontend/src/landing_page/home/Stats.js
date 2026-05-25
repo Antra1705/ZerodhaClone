@@ -1,31 +1,60 @@
-import React from 'react';
+import React from "react";
+import { Link } from "react-router-dom";
 
 function Stats() {
-    return (
-        <div className='container p-3'>
-            <div className='row p-5'>
-                <div className='col-6 p-5'>
-                    <h1 className='fs-2 mb-5'>Trust with confidence</h1>
-                    <h2 className='fs-4'>Customer-first always</h2>
-                    <p className='text-muted'>That's why 1.3+ crore customers trust TradeDash with ₹3.5+ lakh crores worth of equity investments.</p>
-                    <h2 className='fs-4'>No spam or gimmicks</h2>
-                    <p className='text-muted'>No gimmicks, spam, "gamification", or annoying push notifications. High quality apps that you use at your pace, the way you like.</p>
-                    <h2 className='fs-4'>The TradeDash universe</h2>
-                    <p className='text-muted'>Not just an app, but a whole ecosystem. Our investments in 30+ fintech startups offer you tailored services specific to your needs.</p>
-                    <h2 className='fs-4'>Do better with money</h2>
-                    <p className='text-muted'>With initiatives like Nudge and kill Switch, we don't just facilitate transactions, but actively help you do better with your money.</p>
-
-                </div>
-                <div className='col-6 p-5'>
-                    <img src='media/ecosystem.png' style={{ width: "90%" }} alt="Ecosystem" />
-                    <div className='text-center'>
-                        <a href='/' className='mx-5' style={{ textDecoration: "none" }}>Explore our products <i className="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                        <a href='/login' style={{ textDecoration: "none" }}>Try TradeDash <i className="fa fa-long-arrow-right" aria-hidden="true"></i></a>
-                    </div>
-                </div>
-            </div>
+  return (
+    <section className="mk-section">
+      <div className="mk-stats-grid">
+        <div className="mk-stat-list">
+          <div className="mk-stat-item">
+            <h3>Built for professionals, not tourists</h3>
+            <p>
+              No gamification, no confetti on fills, no social feed. TradeDash is a
+              workstation — the same mental model as Bloomberg, with the polish of
+              modern product design.
+            </p>
+          </div>
+          <div className="mk-stat-item">
+            <h3>One session, entire platform</h3>
+            <p>
+              Land on the homepage, authenticate, and land in your terminal without
+              changing ports or domains. Single SPA, single origin, single trust boundary.
+            </p>
+          </div>
+          <div className="mk-stat-item">
+            <h3>Resilient by default</h3>
+            <p>
+              Exponential backoff on upstream feeds, chart cache TTL, and graceful
+              empty states when symbols fail — because uptime is a feature.
+            </p>
+          </div>
+          <Link to="/product" className="mk-btn mk-btn-ghost" style={{ width: "fit-content", marginLeft: 13 }}>
+            Explore the stack →
+          </Link>
         </div>
-    );
+        <div className="mk-trust-panel glass">
+          <div className="mk-trust-metrics">
+            <div className="mk-trust-metric">
+              <strong>2M+</strong>
+              <span>Daily tick events relayed</span>
+            </div>
+            <div className="mk-trust-metric">
+              <strong>99.9%</strong>
+              <span>API availability target</span>
+            </div>
+            <div className="mk-trust-metric">
+              <strong>$0</strong>
+              <span>Platform access fee</span>
+            </div>
+            <div className="mk-trust-metric">
+              <strong>0.5¢</strong>
+              <span>Per-share commission cap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default Stats;
