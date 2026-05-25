@@ -35,26 +35,31 @@ const server = http.createServer(app);
 const PORT = process.env.PORT || 3002;
 const MONGO_URL = process.env.MONGO_URL;
 
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  process.env.FRONTEND_URL,
+  process.env.DASHBOARD_URL,
+].filter(Boolean);
+
+const checkCorsOrigin = (origin, callback) => {
+  if (!origin) return callback(null, true);
+  if (allowedOrigins.indexOf(origin) !== -1 || origin.endsWith(".vercel.app") || origin.includes("vercel.app")) {
+    return callback(null, true);
+  }
+  return callback(new Error("Not allowed by CORS"));
+};
+
 const io = new Server(server, {
   cors: {
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      process.env.FRONTEND_URL,
-      process.env.DASHBOARD_URL,
-    ].filter(Boolean),
+    origin: checkCorsOrigin,
     credentials: true,
   }
 });
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      process.env.FRONTEND_URL,
-      process.env.DASHBOARD_URL,
-    ].filter(Boolean), // Filter out undefined if env vars are not set
+    origin: checkCorsOrigin,
     credentials: true,
   })
 );
