@@ -6,219 +6,162 @@ import {
   KeyboardArrowDown,
   KeyboardArrowUp,
   MoreHoriz,
+  FiberManualRecord,
 } from "@mui/icons-material";
 import { watchlist as initialWatchlist } from "../dashboard_data/data";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, ArcElement, Tooltip as ChartTooltip, Legend } from "chart.js";
 import { io } from "socket.io-client";
 
-ChartJS.register(ArcElement, ChartTooltip, Legend);
-
 const WatchList = () => {
+  const { selectedSymbol, setSelectedSymbol } = useContext(GeneralContext);
   const [stocks, setStocks] = useState(initialWatchlist);
+  const [filter, setFilter] = useState("");
+  const [connected, setConnected] = useState(false);
 
   useEffect(() => {
-    // Establish connection to backend Socket.io server
     const socket = io(process.env.REACT_APP_API_URL || "http://localhost:3002", {
       withCredentials: true,
     });
 
-    socket.on("connect", () => {
-      console.log("🔌 Connected to TradeDash real-time stream!");
-    });
+    socket.on("connect", () => setConnected(true));
+    socket.on("disconnect", () => setConnected(false));
 
     socket.on("price-update", (data) => {
       setStocks((prevStocks) =>
         prevStocks.map((stock) => {
-          if (stock.name === data.symbol) {
-            const oldPrice = stock.price;
-            const newPrice = data.price;
-            const diff = newPrice - oldPrice;
-            
-            let isDown = stock.isDown;
-            if (diff !== 0) {
-              isDown = diff < 0;
-            }
+          if (stock.name !== data.symbol) return stock;
 
-            // Calculate percentage change to keep it realistic
-            const pctVal = ((newPrice - oldPrice) / (oldPrice || 1)) * 100;
-            const currentPctNum = parseFloat(stock.percent.replace("%", ""));
-            const newPct = (currentPctNum + pctVal).toFixed(2) + "%";
+          const oldPrice = stock.price;
+          const newPrice = data.price;
+          const diff = newPrice - oldPrice;
+          const pctVal = ((newPrice - oldPrice) / (oldPrice || 1)) * 100;
+          const currentPctNum = parseFloat(String(stock.percent).replace("%", "").replace("+", ""));
+          const newPct = (currentPctNum + pctVal).toFixed(2);
 
-            return {
-              ...stock,
-              price: newPrice,
-              percent: (pctVal >= 0 ? "+" : "") + newPct,
-              isDown,
-              isFlashUp: diff > 0,
-              isFlashDown: diff < 0,
-            };
-          }
-          return stock;
+          return {
+            ...stock,
+            price: newPrice,
+            percent: `${pctVal >= 0 ? "+" : ""}${newPct}%`,
+            isDown: diff !== 0 ? diff < 0 : stock.isDown,
+            isFlashUp: diff > 0,
+            isFlashDown: diff < 0,
+          };
         })
       );
 
-      // Clear the flash visual animation state after 500ms
       setTimeout(() => {
-        setStocks((prevStocks) =>
-          prevStocks.map((stock) => {
-            if (stock.name === data.symbol) {
-              return {
-                ...stock,
-                isFlashUp: false,
-                isFlashDown: false,
-              };
-            }
-            return stock;
-          })
+        setStocks((prev) =>
+          prev.map((stock) =>
+            stock.name === data.symbol
+              ? { ...stock, isFlashUp: false, isFlashDown: false }
+              : stock
+          )
         );
-      }, 500);
+      }, 420);
     });
 
-    socket.on("connect_error", (err) => {
-      console.warn("⚠️ TradeDash real-time connection error:", err.message);
-    });
-
-    return () => {
-      socket.disconnect();
-    };
+    return () => socket.disconnect();
   }, []);
 
-  const chartLabels = stocks.map((s) => s.name);
-  const chartData = {
-    labels: chartLabels,
-    datasets: [
-      {
-        label: "Price",
-        data: stocks.map((s) => s.price),
-        backgroundColor: [
-          "rgba(255, 99, 132, 0.5)",
-          "rgba(54, 162, 235, 0.5)",
-          "rgba(255, 206, 86, 0.5)",
-          "rgba(75, 192, 192, 0.5)",
-          "rgba(153, 102, 255, 0.5)",
-          "rgba(255, 159, 64, 0.5)",
-        ],
-        borderColor: [
-          "rgba(255, 99, 132, 1)",
-          "rgba(54, 162, 235, 1)",
-          "rgba(255, 206, 86, 1)",
-          "rgba(75, 192, 192, 1)",
-          "rgba(153, 102, 255, 1)",
-          "rgba(255, 159, 64, 1)",
-        ],
-      },
-    ],
-  };
+  const filtered = stocks.filter((s) =>
+    s.name.toLowerCase().includes(filter.toLowerCase())
+  );
 
   return (
     <div className="watchlist-container">
+      <div className="watchlist-header">
+        <span className="watchlist-title">Watchlist</span>
+        <span className={`live-badge ${connected ? "live" : ""}`}>
+          <FiberManualRecord className="live-dot" />
+          {connected ? "LIVE" : "OFF"}
+        </span>
+      </div>
+
       <div className="search-container">
         <input
           type="text"
-          name="search"
-          id="search"
-          placeholder="Search symbols eg: AAPL, TSLA, NVDA"
+          placeholder="Symbol…"
           className="search"
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
         />
-        <span className="counts"> {stocks.length} / 50</span>
+        <span className="counts">{filtered.length}</span>
+      </div>
+
+      <div className="watchlist-col-labels">
+        <span>Symbol</span>
+        <span>Chg%</span>
+        <span>Last</span>
       </div>
 
       <ul className="list">
-        {stocks.map((stock, index) => {
-          return <WatchListItem stock={stock} key={index} />;
-        })}
+        {filtered.map((stock) => (
+          <WatchListItem
+            key={stock.name}
+            stock={stock}
+            active={selectedSymbol === stock.name}
+            onSelect={() => setSelectedSymbol(stock.name)}
+          />
+        ))}
       </ul>
-      <div style={{ height: "200px", width: "100%", marginTop: "20px" }}>
-        <Doughnut data={chartData} options={{ maintainAspectRatio: false }} />
-      </div>
     </div>
   );
 };
 
 export default WatchList;
 
-const WatchListItem = ({ stock }) => {
-  const [showWatchlistActions, setShowWatchlistActions] = useState(false);
+const WatchListItem = ({ stock, active, onSelect }) => {
+  const [showActions, setShowActions] = useState(false);
+  const generalContext = useContext(GeneralContext);
 
-  const handleMouseEnter = () => {
-    setShowWatchlistActions(true);
-  };
-
-  const handleMouseLeave = () => {
-    setShowWatchlistActions(false);
-  };
-
-  // Setup visual flashing micro-animations
-  let itemClasses = "item";
-  if (stock.isFlashUp) itemClasses += " flash-up-tick";
-  if (stock.isFlashDown) itemClasses += " flash-down-tick";
+  let rowClass = "watchlist-row";
+  if (active) rowClass += " selected";
+  if (stock.isFlashUp) rowClass += " flash-up-tick";
+  if (stock.isFlashDown) rowClass += " flash-down-tick";
 
   return (
-    <li onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <div className={itemClasses} style={{ transition: "background-color 0.3s ease", padding: "10px 15px" }}>
-        <p className={stock.isDown ? "down" : "up"}>{stock.name}</p>
-        <div className="itemInfo">
-          <span className="percent">{stock.percent}</span>
-          {stock.isDown ? (
-            <KeyboardArrowDown className="down" />
-          ) : (
-            <KeyboardArrowUp className="up" />
-          )}
-          <span className="price">{stock.price.toFixed(2)}</span>
-        </div>
-      </div>
-      {showWatchlistActions && <WatchListActions uid={stock.name} />}
+    <li
+      onMouseEnter={() => setShowActions(true)}
+      onMouseLeave={() => setShowActions(false)}
+    >
+      <button type="button" className={rowClass} onClick={onSelect}>
+        <span className={`symbol-name ${stock.isDown ? "down" : "up"}`}>{stock.name}</span>
+        <span className={`chg mono ${stock.isDown ? "down" : "up"}`}>{stock.percent}</span>
+        <span className={`last mono ${stock.isDown ? "down" : "up"}`}>
+          {stock.price.toFixed(2)}
+        </span>
+        {stock.isDown ? (
+          <KeyboardArrowDown className="tick-icon down" />
+        ) : (
+          <KeyboardArrowUp className="tick-icon up" />
+        )}
+      </button>
+      {showActions && (
+        <WatchListActions
+          uid={stock.name}
+          onBuy={() => generalContext.openBuyWindow(stock.name)}
+          onChart={() => generalContext.openAnalyticsWindow(stock.name)}
+        />
+      )}
     </li>
   );
 };
 
-const WatchListActions = ({ uid }) => {
-  const generalContext = useContext(GeneralContext);
-
-  const handleBuyClick = () => {
-    generalContext.openBuyWindow(uid);
-  };
-
-  const handleAnalyticsClick = () => {
-    generalContext.openAnalyticsWindow(uid);
-  };
-
-  return (
-    <span className="actions">
-      <span>
-        <Tooltip
-          title="Buy (B)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-        >
-          <button className="buy" onClick={handleBuyClick}>Buy</button>
-        </Tooltip>
-        <Tooltip
-          title="Sell (S)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-        >
-          <button className="sell">Sell</button>
-        </Tooltip>
-        <Tooltip
-          title="Analytics (A)"
-          placement="top"
-          arrow
-          TransitionComponent={Grow}
-        >
-          <button className="action" onClick={handleAnalyticsClick}>
-            <BarChartOutlined className="icon" />
-          </button>
-        </Tooltip>
-        <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
-          <button className="action">
-            <MoreHoriz className="icon" />
-          </button>
-        </Tooltip>
-      </span>
-    </span>
-  );
-};
+const WatchListActions = ({ uid, onBuy, onChart }) => (
+  <span className="actions">
+    <Tooltip title="Buy" placement="top" arrow TransitionComponent={Grow}>
+      <button type="button" className="buy" onClick={onBuy}>
+        B
+      </button>
+    </Tooltip>
+    <Tooltip title="Chart" placement="top" arrow TransitionComponent={Grow}>
+      <button type="button" className="action" onClick={onChart}>
+        <BarChartOutlined className="icon" />
+      </button>
+    </Tooltip>
+    <Tooltip title="More" placement="top" arrow TransitionComponent={Grow}>
+      <button type="button" className="action">
+        <MoreHoriz className="icon" />
+      </button>
+    </Tooltip>
+  </span>
+);

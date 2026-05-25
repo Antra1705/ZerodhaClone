@@ -22,7 +22,9 @@ const Holdings = () => {
       {
         label: "Stock Price",
         data: allHoldings.map((stock) => parseFloat(stock.price)),
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        backgroundColor: "rgba(0, 212, 255, 0.35)",
+        borderColor: "rgba(0, 212, 255, 0.6)",
+        borderWidth: 1,
       },
     ],
   };
@@ -44,7 +46,7 @@ const Holdings = () => {
   // // };
 
   return (
-    <>
+    <div className="terminal-page">
       <h3 className="title">Holdings ({allHoldings.length})</h3>
 
       <div className="order-table">
@@ -102,10 +104,10 @@ const Holdings = () => {
           <p>P&L</p>
         </div>
       </div>
-      <div style={{ height: "400px", width: "100%", marginTop: "40px" }}>
+      <div style={{ height: "160px", width: "100%", marginTop: "12px" }}>
         <VerticalGraph data={data} />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -1,84 +1,107 @@
-/* ⚡ BuyActionWindow Stylesheet - TradeDash Order Ticket */
+/* Order ticket — docked rail + legacy modal */
+
+.order-ticket-docked {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-ticket-docked .order-window-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  animation: none;
+}
 
 .order-window-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(5px);
+  inset: 0;
+  background: rgba(4, 8, 18, 0.75);
+  backdrop-filter: blur(8px);
   z-index: 2000;
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: modalFadeIn 0.25s ease;
 }
 
 .order-window-container {
-  width: 440px;
-  background-color: #1e222d;
-  color: #d1d4dc;
-  border-radius: 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  overflow: hidden;
+  width: 100%;
+  max-width: 100%;
+  background: rgba(10, 15, 30, 0.95);
+  color: #e2e8f0;
   box-sizing: border-box;
-  animation: modalSlideUp 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  border: 1px solid #2a2e39;
-  transition: border-color 0.3s ease;
+  font-family: "Inter", sans-serif;
 }
 
-.order-window-container.buy {
-  border-color: rgba(41, 182, 246, 0.4);
+.order-window-container.docked {
+  padding: 0;
 }
 
-.order-window-container.sell {
-  border-color: rgba(255, 87, 34, 0.4);
+.order-window-container.buy.docked {
+  box-shadow: inset 3px 0 0 rgba(0, 212, 255, 0.5);
 }
 
-/* Header */
+.order-window-container.sell.docked {
+  box-shadow: inset 3px 0 0 rgba(255, 71, 87, 0.5);
+}
+
 .order-window-header {
-  padding: 18px 24px;
-  border-bottom: 1px solid #2a2e39;
+  padding: 14px 16px;
+  border-bottom: 1px solid rgba(0, 212, 255, 0.08);
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .order-window-header h3 {
   margin: 0;
-  font-size: 1.15rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #fff;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.9);
 }
 
 .order-window-header .exchange-tag {
-  font-size: 0.7rem;
-  color: #888;
-  font-weight: 500;
-  letter-spacing: 0.5px;
+  display: block;
+  font-size: 0.6rem;
+  color: rgba(148, 163, 184, 0.55);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
 }
 
 .stock-ticker {
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #29b6f6;
-  background-color: rgba(41, 182, 246, 0.1);
-  padding: 4px 10px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #00d4ff;
+  padding: 4px 8px;
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.2);
   border-radius: 4px;
 }
 
 .order-window-container.sell .stock-ticker {
-  color: #ff5722;
-  background-color: rgba(255, 87, 34, 0.1);
+  color: #ff4757;
+  background: rgba(255, 71, 87, 0.08);
+  border-color: rgba(255, 71, 87, 0.25);
 }
 
-/* Toggle Switcher */
+.mono {
+  font-family: "JetBrains Mono", "SF Mono", monospace;
+  font-variant-numeric: tabular-nums;
+}
+
 .mode-toggle-bar {
   display: flex;
-  background-color: #131722;
-  padding: 4px;
-  margin: 15px 24px 0 24px;
+  gap: 4px;
+  margin: 12px 14px 0;
+  padding: 3px;
+  background: rgba(10, 15, 30, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.08);
   border-radius: 6px;
 }
 
@@ -86,60 +109,61 @@
   flex: 1;
   background: transparent;
   border: none;
-  color: #b2b5be;
-  font-size: 0.85rem;
-  font-weight: 600;
-  padding: 10px 0;
-  cursor: pointer;
+  color: rgba(148, 163, 184, 0.8);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 8px 0;
   border-radius: 4px;
-  transition: all 0.2s ease;
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
 .buy-toggle.active {
-  background-color: #4184f3;
-  color: #fff;
+  background: rgba(0, 212, 255, 0.2);
+  color: #00d4ff;
 }
 
 .sell-toggle.active {
-  background-color: #ff5722;
-  color: #fff;
+  background: rgba(255, 71, 87, 0.2);
+  color: #ff4757;
 }
 
-/* Forms body */
 .regular-order {
-  padding: 20px 24px;
+  padding: 14px;
+  flex: 1;
 }
 
 .inputs-row {
   display: flex;
-  gap: 16px;
-  margin-bottom: 20px;
+  gap: 10px;
+  margin-bottom: 14px;
 }
 
 .input-group {
   flex: 1;
-  border: 1px solid #363c4e;
+  border: 1px solid rgba(0, 212, 255, 0.12);
   border-radius: 6px;
-  background-color: #131722;
+  background: rgba(10, 15, 30, 0.6);
   margin: 0;
-  padding: 0 10px 6px 10px;
+  padding: 0 10px 6px;
 }
 
 .input-group legend {
-  font-size: 0.75rem;
-  color: #888;
+  font-size: 0.6rem;
+  color: rgba(148, 163, 184, 0.6);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   padding: 0 4px;
-  margin-left: 6px;
 }
 
 .input-group input {
   width: 100%;
   border: none;
   background: transparent;
-  color: #fff;
-  font-size: 1.15rem;
-  font-weight: 500;
-  height: 32px;
+  color: #f1f5f9;
+  font-size: 1rem;
+  height: 30px;
   box-sizing: border-box;
 }
 
@@ -148,139 +172,111 @@
 }
 
 .input-group input:disabled {
-  color: #555;
-  cursor: not-allowed;
+  color: rgba(148, 163, 184, 0.4);
 }
 
-/* Order Types Buttons */
 .order-type-selector {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
 }
 
 .type-label {
-  font-size: 0.8rem;
-  color: #888;
-  font-weight: 500;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.6);
 }
 
 .type-buttons {
   display: flex;
-  gap: 8px;
+  gap: 4px;
 }
 
 .type-btn {
   flex: 1;
-  background-color: #2a2e39;
-  border: 1px solid #363c4e;
-  color: #b2b5be;
-  padding: 8px 0;
+  background: rgba(15, 22, 40, 0.8);
+  border: 1px solid rgba(0, 212, 255, 0.1);
+  color: rgba(148, 163, 184, 0.85);
+  padding: 7px 0;
   border-radius: 4px;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  transition: all 0.25s ease;
-}
-
-.type-btn:hover {
-  background-color: #363c4e;
-  color: #fff;
+  letter-spacing: 0.04em;
+  transition: all 0.15s;
 }
 
 .type-btn.active {
-  background-color: #1e222d;
-  color: #fff;
-  border-color: #29b6f6;
+  border-color: rgba(0, 212, 255, 0.4);
+  color: #00d4ff;
+  background: rgba(0, 212, 255, 0.08);
 }
 
 .order-window-container.sell .type-btn.active {
-  border-color: #ff5722;
+  border-color: rgba(255, 71, 87, 0.4);
+  color: #ff4757;
+  background: rgba(255, 71, 87, 0.08);
 }
 
-/* Footer Section */
 .buttons-footer {
-  background-color: #131722;
-  padding: 18px 24px;
-  border-top: 1px solid #2a2e39;
+  padding: 14px;
+  border-top: 1px solid rgba(0, 212, 255, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 12px;
-}
-
-.margin-estimate {
-  font-size: 0.85rem;
-  color: #888;
-}
-
-.margin-estimate strong {
-  color: #fff;
-  font-size: 0.95rem;
-}
-
-.action-buttons {
-  display: flex;
   gap: 10px;
 }
 
+.margin-estimate {
+  font-size: 0.7rem;
+  color: rgba(148, 163, 184, 0.7);
+}
+
+.margin-estimate strong {
+  color: #f1f5f9;
+}
+
 .submit-order-btn {
-  flex: 2;
+  width: 100%;
   border: none;
-  padding: 12px 0;
+  padding: 12px;
   border-radius: 6px;
-  color: #fff;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  transition: filter 0.2s;
+  transition: filter 0.15s, box-shadow 0.15s;
 }
 
 .submit-order-btn:hover {
-  filter: brightness(1.15);
+  filter: brightness(1.1);
 }
 
-.submit-order-btn.btn-blue {
-  background-color: #4184f3;
-  box-shadow: 0 4px 10px rgba(65, 132, 243, 0.3);
+.btn-buy {
+  background: linear-gradient(135deg, rgba(0, 212, 255, 0.35), rgba(0, 180, 220, 0.25));
+  color: #00d4ff;
+  border: 1px solid rgba(0, 212, 255, 0.45);
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
 }
 
-.submit-order-btn.btn-orange {
-  background-color: #ff5722;
-  box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
+.btn-sell {
+  background: linear-gradient(135deg, rgba(255, 71, 87, 0.35), rgba(220, 50, 65, 0.25));
+  color: #ff4757;
+  border: 1px solid rgba(255, 71, 87, 0.45);
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.12);
 }
 
-.cancel-order-btn {
-  flex: 1;
-  background-color: #2a2e39;
-  border: 1px solid #363c4e;
-  color: #b2b5be;
-  padding: 12px 0;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s;
+.order-window-overlay .order-window-container {
+  width: 400px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 212, 255, 0.15);
+  animation: ticket-slide 0.25s ease;
 }
 
-.cancel-order-btn:hover {
-  background-color: #363c4e;
-  color: #fff;
-}
-
-/* Animations */
-@keyframes modalFadeIn {
+@keyframes ticket-slide {
   from {
     opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes modalSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;

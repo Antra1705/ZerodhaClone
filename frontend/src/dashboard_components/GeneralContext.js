@@ -1,58 +1,33 @@
 import React, { useState } from "react";
 
-import BuyActionWindow from "./BuyActionWindow";
-import StockChartDrawer from "./StockChartDrawer";
-
 const GeneralContext = React.createContext({
-  openBuyWindow: (uid) => {},
+  selectedSymbol: "AAPL",
+  setSelectedSymbol: () => {},
+  openBuyWindow: () => {},
   closeBuyWindow: () => {},
-  openAnalyticsWindow: (uid) => {},
+  openAnalyticsWindow: () => {},
   closeAnalyticsWindow: () => {},
 });
 
-export const GeneralContextProvider = (props) => {
-  const [isBuyWindowOpen, setIsBuyWindowOpen] = useState(false);
-  const [isAnalyticsOpen, setIsAnalyticsOpen] = useState(false);
-  const [selectedStockUID, setSelectedStockUID] = useState("");
-  const [selectedAnalyticsUID, setSelectedAnalyticsUID] = useState("");
+export const GeneralContextProvider = ({ children }) => {
+  const [selectedSymbol, setSelectedSymbol] = useState("AAPL");
 
-  const handleOpenBuyWindow = (uid) => {
-    setIsBuyWindowOpen(true);
-    setSelectedStockUID(uid);
-  };
-
-  const handleCloseBuyWindow = () => {
-    setIsBuyWindowOpen(false);
-    setSelectedStockUID("");
-  };
-
-  const handleOpenAnalyticsWindow = (uid) => {
-    setIsAnalyticsOpen(true);
-    setSelectedAnalyticsUID(uid);
-  };
-
-  const handleCloseAnalyticsWindow = () => {
-    setIsAnalyticsOpen(false);
-    setSelectedAnalyticsUID("");
+  const selectSymbol = (uid) => {
+    if (uid) setSelectedSymbol(uid);
   };
 
   return (
     <GeneralContext.Provider
       value={{
-        openBuyWindow: handleOpenBuyWindow,
-        closeBuyWindow: handleCloseBuyWindow,
-        openAnalyticsWindow: handleOpenAnalyticsWindow,
-        closeAnalyticsWindow: handleCloseAnalyticsWindow,
+        selectedSymbol,
+        setSelectedSymbol: selectSymbol,
+        openBuyWindow: selectSymbol,
+        closeBuyWindow: () => {},
+        openAnalyticsWindow: selectSymbol,
+        closeAnalyticsWindow: () => {},
       }}
     >
-      {props.children}
-      {isBuyWindowOpen && <BuyActionWindow uid={selectedStockUID} />}
-      {isAnalyticsOpen && (
-        <StockChartDrawer
-          symbol={selectedAnalyticsUID}
-          onClose={handleCloseAnalyticsWindow}
-        />
-      )}
+      {children}
     </GeneralContext.Provider>
   );
 };

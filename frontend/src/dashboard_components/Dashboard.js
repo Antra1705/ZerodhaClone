@@ -1,26 +1,38 @@
-import React from "react";
-// import { Route, Routes } from "react-router-dom";
-
-// import Apps from "./Apps";
-// import Funds from "./Funds";
-// import Holdings from "./Holdings";
-// import Orders from "./Orders";
-// import Positions from "./Positions";
-
+import React, { useContext } from "react";
 import WatchList from "./WatchList";
+import TerminalChart from "./TerminalChart";
+import BuyActionWindow from "./BuyActionWindow";
 import { GeneralContextProvider } from "./GeneralContext";
+import GeneralContext from "./GeneralContext";
+
+const TerminalWorkspace = ({ children }) => {
+  const { selectedSymbol } = useContext(GeneralContext);
+
+  return (
+    <div className="terminal-layout">
+      <aside className="terminal-sidebar glass-panel">
+        <WatchList />
+      </aside>
+
+      <section className="terminal-workspace">
+        <div className="terminal-chart-zone glass-panel">
+          <TerminalChart symbol={selectedSymbol} />
+        </div>
+        <div className="terminal-route-content">{children}</div>
+      </section>
+
+      <aside className="terminal-order-rail glass-panel">
+        <BuyActionWindow uid={selectedSymbol} docked />
+      </aside>
+    </div>
+  );
+};
 
 const Dashboard = ({ children }) => {
   return (
-    <div className="dashboard-container">
-      <GeneralContextProvider>
-        <WatchList />
-      </GeneralContextProvider>
-
-      <div className="content">
-        {children}
-      </div>
-    </div>
+    <GeneralContextProvider>
+      <TerminalWorkspace>{children}</TerminalWorkspace>
+    </GeneralContextProvider>
   );
 };
 

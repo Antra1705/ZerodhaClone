@@ -15,7 +15,7 @@ const Positions = () => {
         });
     }, []);
     return (
-        <>
+        <div className="terminal-page">
             <h3 className="title">Positions ({allPositions.length})</h3>
 
             <div className="order-table">
@@ -52,7 +52,7 @@ const Positions = () => {
                     })}
                 </table>
             </div>
-        </>
+        </div>
     );
 };
 

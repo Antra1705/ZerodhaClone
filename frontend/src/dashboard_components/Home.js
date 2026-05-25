@@ -14,35 +14,23 @@ const Home = () => {
     api
       .get("/allHoldings")
       .then(() => setAuthorized(true))
-      .catch(() => {
-        navigate("/login", { replace: true });
-      })
+      .catch(() => navigate("/login", { replace: true }))
       .finally(() => setLoading(false));
   }, [navigate]);
 
   if (loading) {
     return (
-      <div style={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#0d0f12",
-        color: "#ffffff",
-        fontFamily: "'Inter', sans-serif"
-      }}>
-        <div style={{ fontSize: "1.5rem", fontWeight: "700", color: "#4184f3", marginBottom: "15px" }}>TradeDash</div>
-        <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "#9ca3af", fontSize: "0.95rem" }}>
-          <i className="fa fa-circle-o-notch fa-spin"></i> Checking authentication...
+      <div className="terminal-boot">
+        <div className="terminal-boot-logo">TradeDash</div>
+        <div className="terminal-boot-status">
+          <span className="terminal-pulse" />
+          Authenticating session…
         </div>
       </div>
     );
   }
 
-  if (!authorized) {
-    return null;
-  }
+  if (!authorized) return null;
 
   return (
     <div className="dashboard-root">

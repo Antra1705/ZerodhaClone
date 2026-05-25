@@ -1,64 +1,37 @@
 import React from "react";
 
 const Summary = () => {
-    return (
-        <>
-            <div className="username">
-                <h6>Hi, User!</h6>
-                <hr className="divider" />
-            </div>
+  return (
+    <div className="terminal-page summary-page">
+      <div className="page-header">
+        <h2 className="page-title">Portfolio Overview</h2>
+        <span className="page-meta mono">Session · US MARKET</span>
+      </div>
 
-            <div className="section">
-                <span>
-                    <p>Equity</p>
-                </span>
-
-                <div className="data">
-                    <div className="first">
-                        <h3>3.74k</h3>
-                        <p>Margin available</p>
-                    </div>
-                    <hr />
-
-                    <div className="second">
-                        <p>
-                            Margins used <span>0</span>{" "}
-                        </p>
-                        <p>
-                            Opening balance <span>3.74k</span>{" "}
-                        </p>
-                    </div>
-                </div>
-                <hr className="divider" />
-            </div>
-
-            <div className="section">
-                <span>
-                    <p>Holdings (13)</p>
-                </span>
-
-                <div className="data">
-                    <div className="first">
-                        <h3 className="profit">
-                            1.55k <small>+5.20%</small>{" "}
-                        </h3>
-                        <p>P&L</p>
-                    </div>
-                    <hr />
-
-                    <div className="second">
-                        <p>
-                            Current Value <span>31.43k</span>{" "}
-                        </p>
-                        <p>
-                            Investment <span>29.88k</span>{" "}
-                        </p>
-                    </div>
-                </div>
-                <hr className="divider" />
-            </div>
-        </>
-    );
+      <div className="metric-grid">
+        <div className="metric-card glass-panel">
+          <span className="metric-label">Margin available</span>
+          <span className="metric-value mono">$3,740.00</span>
+          <span className="metric-sub">Equity account</span>
+        </div>
+        <div className="metric-card glass-panel">
+          <span className="metric-label">Margins used</span>
+          <span className="metric-value mono muted">$0.00</span>
+          <span className="metric-sub">Intraday + delivery</span>
+        </div>
+        <div className="metric-card glass-panel">
+          <span className="metric-label">Unrealized P&amp;L</span>
+          <span className="metric-value mono up">+$1,550.00</span>
+          <span className="metric-sub up">+5.20%</span>
+        </div>
+        <div className="metric-card glass-panel">
+          <span className="metric-label">Portfolio value</span>
+          <span className="metric-value mono">$31,430.00</span>
+          <span className="metric-sub">13 positions</span>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Summary;

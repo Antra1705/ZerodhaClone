@@ -2,8 +2,8 @@ import React from "react";
 
 const Apps = () => {
   return (
-    <div className="apps-container">
-      <h3>Apps</h3>
+    <div className="terminal-page apps-container">
+      <h3 className="title">Apps</h3>
       <div className="apps-grid">
         <div className="app-card">
           <h4>Coin</h4>
