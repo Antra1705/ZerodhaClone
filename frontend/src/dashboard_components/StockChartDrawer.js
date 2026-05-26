@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { createChart } from "lightweight-charts";
+import {
+  createChart,
+  CandlestickSeries,
+  HistogramSeries,
+  LineSeries,
+} from "lightweight-charts";
 import api from "../api";
 import "./StockChartDrawer.css";
 
@@ -66,21 +71,15 @@ const StockChartDrawer = ({ symbol, onClose }) => {
     chartRef.current = chart;
 
     // Volume Chart setup (separate pane at bottom of the same chart)
-    const volumeSeries = chart.addHistogramSeries({
+    const volumeSeries = chart.addSeries(HistogramSeries, {
       color: "#26a69a",
-      priceFormat: {
-        type: "volume",
-      },
-      priceScaleId: "volume-scale", // separate scale
+      priceFormat: { type: "volume" },
+      priceScaleId: "volume",
     });
     volumeSeriesRef.current = volumeSeries;
 
-    // Set separate price scale for volume at the bottom
-    chart.priceScale("volume-scale").applyOptions({
-      scaleMargins: {
-        top: 0.8, // volume takes up bottom 20%
-        bottom: 0,
-      },
+    chart.priceScale("volume").applyOptions({
+      scaleMargins: { top: 0.8, bottom: 0 },
     });
 
     const volumeData = chartData.map((d) => ({
@@ -92,7 +91,7 @@ const StockChartDrawer = ({ symbol, onClose }) => {
 
     // Dynamic rendering of Candlestick vs Line Chart
     if (chartType === "candlestick") {
-      const candlestickSeries = chart.addCandlestickSeries({
+      const candlestickSeries = chart.addSeries(CandlestickSeries, {
         upColor: "#26a69a",
         downColor: "#ef5350",
         borderVisible: false,
@@ -102,7 +101,7 @@ const StockChartDrawer = ({ symbol, onClose }) => {
       candlestickSeries.setData(chartData);
       candlestickSeriesRef.current = candlestickSeries;
     } else {
-      const lineSeries = chart.addLineSeries({
+      const lineSeries = chart.addSeries(LineSeries, {
         color: "#29b6f6",
         lineWidth: 2,
       });

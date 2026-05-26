@@ -1,5 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
-import { createChart } from "lightweight-charts";
+import {
+  createChart,
+  CandlestickSeries,
+  HistogramSeries,
+  LineSeries,
+} from "lightweight-charts";
 import api from "../api";
 import "./TerminalChart.css";
 
@@ -60,13 +65,13 @@ const TerminalChart = ({ symbol }) => {
 
     chartRef.current = chart;
 
-    const volumeSeries = chart.addHistogramSeries({
+    const volumeSeries = chart.addSeries(HistogramSeries, {
       color: "rgba(0, 212, 255, 0.35)",
       priceFormat: { type: "volume" },
-      priceScaleId: "volume-scale",
+      priceScaleId: "volume",
     });
 
-    chart.priceScale("volume-scale").applyOptions({
+    chart.priceScale("volume").applyOptions({
       scaleMargins: { top: 0.82, bottom: 0 },
     });
 
@@ -79,7 +84,7 @@ const TerminalChart = ({ symbol }) => {
     );
 
     if (chartType === "candlestick") {
-      const candlestickSeries = chart.addCandlestickSeries({
+      const candlestickSeries = chart.addSeries(CandlestickSeries, {
         upColor: "#00d4ff",
         downColor: "#ff4757",
         borderVisible: false,
@@ -88,7 +93,7 @@ const TerminalChart = ({ symbol }) => {
       });
       candlestickSeries.setData(chartData);
     } else {
-      const lineSeries = chart.addLineSeries({
+      const lineSeries = chart.addSeries(LineSeries, {
         color: "#00d4ff",
         lineWidth: 2,
       });
